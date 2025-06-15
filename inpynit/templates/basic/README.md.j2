@@ -1,0 +1,47 @@
+# {{ project_name }}
+
+{{ description }}
+
+## 설치
+
+```bash
+pip install {{ project_name }}
+```
+
+## 사용법
+
+```python
+from {{ project_slug }} import main
+
+# 여기에 사용 예제를 작성하세요
+```
+
+## 개발
+
+```bash
+# 개발 환경 설정
+git clone https://github.com/{{ author }}/{{ project_name }}.git
+cd {{ project_name }}
+pip install -e ".[dev]"
+
+# 테스트 실행
+pytest
+
+# 코드 포매팅
+black .
+
+# 타입 체크
+mypy {{ project_slug }}
+```
+
+## 라이선스
+
+MIT License
+
+## 기여
+
+기여를 환영합니다! Pull Request를 보내주세요.
+
+---
+
+Generated with ❤️ by [inpynit](https://github.com/inpynit/inpynit) 
