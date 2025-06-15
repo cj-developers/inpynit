@@ -4,7 +4,20 @@ inpynit - 무한한 가능성을 가진 파이썬 프로젝트를 시작하게 �
 이 패키지는 다양한 템플릿을 사용하여 파이썬 프로젝트를 빠르게 생성할 수 있게 해줍니다.
 """
 
-__version__ = "0.0.1"
+try:
+    from ._version import __version__
+except ImportError:
+    # setuptools-scm이 _version.py를 생성하지 못한 경우 fallback
+    try:
+        from importlib.metadata import version
+
+        __version__ = version("inpynit")
+    except ImportError:
+        # Python < 3.8 호환성
+        from importlib_metadata import version
+
+        __version__ = version("inpynit")
+
 __author__ = "Your Name"
 __email__ = "your.email@example.com"
 

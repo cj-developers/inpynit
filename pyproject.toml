@@ -36,6 +36,7 @@ dev = [
     "pytest>=7.0.0",
     "ruff>=0.1.0",
     "build>=0.10.0",
+    "setuptools-scm>=6.2",
 ]
 
 [project.scripts]
@@ -80,6 +81,6 @@ known-first-party = ["inpynit"]
 force-single-line = false
 
 [tool.setuptools_scm]
-# git 태그를 읽어서 버전을 자동 생성
 write_to = "inpynit/_version.py"
 fallback_version = "0.0.0+dev"
+version_scheme = "release-branch-semver"
