@@ -1,24 +1,24 @@
 """
-inpynit: 무한한 가능성을 가진 파이썬 프로젝트를 시작하게 해주는 도구
+inpynit - 무한한 가능성을 가진 파이썬 프로젝트를 시작하게 해주는 도구
 
-Infinite + Python + Init = inpynit
+이 패키지는 다양한 템플릿을 사용하여 파이썬 프로젝트를 빠르게 생성할 수 있게 해줍니다.
 """
 
-try:
-    from ._version import version as __version__
-except ImportError:
-    # 개발 모드이거나 setuptools_scm이 실행되지 않은 경우
-    try:
-        from importlib.metadata import version
+__version__ = "0.0.1"
+__author__ = "Your Name"
+__email__ = "your.email@example.com"
 
-        __version__ = version("inpynit")
-    except Exception:
-        __version__ = "0.0.0+dev"
+from .cli import main
+from .core import ProjectConfig, ProjectCreator
+from .templates import get_available_templates, get_template_config
 
-__author__ = "inpynit"
-__email__ = "contact@inpynit.dev"
-
-from .core import ProjectCreator
-from .templates import get_available_templates
-
-__all__ = ["ProjectCreator", "get_available_templates"]
+__all__ = [
+    "__version__",
+    "__author__",
+    "__email__",
+    "main",
+    "ProjectConfig",
+    "ProjectCreator",
+    "get_available_templates",
+    "get_template_config",
+]

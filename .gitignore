@@ -141,5 +141,8 @@ Thumbs.db
 # Poetry (deprecated)
 poetry.lock
 
+# setuptools-scm generated version file
+*/_version.py
+
 # Test output directories
 simple-test/ 
