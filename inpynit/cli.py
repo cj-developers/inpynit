@@ -41,11 +41,17 @@ def welcome_message():
     """
 
     panel_content = f"[bold blue]{title}[/bold blue]\n[dim]{subtitle}[/dim]\n{description}"
+
+    # 박스 최대 폭 제한 (터미널이 좁으면 자동 조정)
+    max_width = 100
+    panel_width = min(console.size.width - 4, max_width)
+
     console.print(
         Panel(
             panel_content,
             border_style="blue",
             padding=(1, 2),
+            width=panel_width,
         )
     )
 

@@ -38,6 +38,8 @@ class ProjectCreator:
     def __init__(self):
         self.console = Console()
         self.templates_dir = Path(__file__).parent / "templates"
+        # 박스 최대 폭 설정 (기본: 100자, 터미널이 좁으면 자동 조정)
+        self.max_panel_width = 100
 
     def create_project(self, config: ProjectConfig, target_dir: Optional[Path] = None) -> bool:
         """
@@ -233,5 +235,8 @@ class ProjectCreator:
             next_steps.append("5. make version-status  # 버전 확인\n", style="white")
             next_steps.append("6. 개발을 시작하세요! 🚀\n", style="white")
 
-        self.console.print(Panel(success_text, title="✨ 완료!", border_style="green"))
-        self.console.print(Panel(next_steps, title="🚀 시작하기", border_style="blue"))
+        # 터미널 폭과 최대 폭 중 작은 값 사용
+        panel_width = min(self.console.size.width - 4, self.max_panel_width)
+
+        self.console.print(Panel(success_text, title="✨ 완료!", border_style="green", width=panel_width))
+        self.console.print(Panel(next_steps, title="🚀 시작하기", border_style="blue", width=panel_width))
