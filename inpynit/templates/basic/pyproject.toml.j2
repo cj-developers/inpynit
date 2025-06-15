@@ -7,18 +7,13 @@ name = "{{ project_name }}"
 dynamic = ["version"]
 description = "{{ description }}"
 readme = "README.md"
-{% if license %}license = {text = "{{ license }}"}{% endif %}
+{% if license %}license = "{{ license }}"{% endif %}
 authors = [
     {name = "{{ author }}", email = "{{ email }}"}
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    {% if license == "MIT" %}"License :: OSI Approved :: MIT License",{% endif %}
-    {% if license == "Apache-2.0" %}"License :: OSI Approved :: Apache Software License",{% endif %}
-    {% if license == "GPL-3.0" %}"License :: OSI Approved :: GNU General Public License v3 (GPLv3)",{% endif %}
-    {% if license == "BSD-3-Clause" %}"License :: OSI Approved :: BSD License",{% endif %}
-    {% if license == "ISC" %}"License :: OSI Approved :: ISC License (ISCL)",{% endif %}
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",

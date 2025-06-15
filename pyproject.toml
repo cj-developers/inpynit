@@ -7,14 +7,13 @@ name = "inpynit"
 dynamic = ["version"]
 description = "무한한 가능성을 가진 파이썬 프로젝트를 시작하게 해주는 도구"
 readme = "README.md"
-license = {text = "MIT"}
+license = "MIT"
 authors = [
     {name = "Your Name", email = "your.email@example.com"}
 ]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.8",
     "Programming Language :: Python :: 3.9",
@@ -81,4 +80,4 @@ force-single-line = false
 [tool.setuptools_scm]
 write_to = "inpynit/_version.py"
 fallback_version = "0.0.0+dev"
-version_scheme = "release-branch-semver"
+version_scheme = "post-release"
