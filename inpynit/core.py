@@ -30,8 +30,6 @@ class ProjectConfig:
     license: str = "MIT"
     use_conda: bool = True
     use_git: bool = True
-    use_pre_commit: bool = True
-    use_github_actions: bool = True
 
 
 class ProjectCreator:
@@ -141,8 +139,6 @@ class ProjectCreator:
             "python_version": config.python_version,
             "license": config.license,
             "use_git": config.use_git,
-            "use_pre_commit": config.use_pre_commit,
-            "use_github_actions": config.use_github_actions,
         }
 
         # 템플릿 파일들 처리
@@ -189,6 +185,13 @@ class ProjectCreator:
                 check=True,
                 capture_output=True,
             )
+            # 초기 버전 태그 생성
+            subprocess.run(
+                ["git", "tag", "-a", "0.1.0", "-m", "Initial release 0.1.0"],
+                cwd=project_path,
+                check=True,
+                capture_output=True,
+            )
         except subprocess.CalledProcessError:
             # Git이 설치되지 않았거나 오류가 발생한 경우 무시
             pass
@@ -207,11 +210,15 @@ class ProjectCreator:
         if config.use_conda:
             next_steps.append(f"2. conda activate {config.name}-dev\n", style="white")
             next_steps.append("3. pip install -e .\n", style="white")
-            next_steps.append("4. 개발을 시작하세요! 🚀\n", style="white")
+            next_steps.append("4. make help  # 개발 도구 확인\n", style="white")
+            next_steps.append("5. make version-status  # 버전 확인\n", style="white")
+            next_steps.append("6. 개발을 시작하세요! 🚀\n", style="white")
         else:
             next_steps.append("2. 가상환경을 직접 설정하세요\n", style="white")
             next_steps.append("3. pip install -e .\n", style="white")
-            next_steps.append("4. 개발을 시작하세요! 🚀\n", style="white")
+            next_steps.append("4. make help  # 개발 도구 확인\n", style="white")
+            next_steps.append("5. make version-status  # 버전 확인\n", style="white")
+            next_steps.append("6. 개발을 시작하세요! 🚀\n", style="white")
 
         self.console.print(Panel(success_text, title="✨ 완료!", border_style="green"))
         self.console.print(Panel(next_steps, title="🚀 시작하기", border_style="blue"))

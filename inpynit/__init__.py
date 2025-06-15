@@ -4,7 +4,17 @@ inpynit: 무한한 가능성을 가진 파이썬 프로젝트를 시작하게 �
 Infinite + Python + Init = inpynit
 """
 
-__version__ = "0.1.0"
+try:
+    from ._version import version as __version__
+except ImportError:
+    # 개발 모드이거나 setuptools_scm이 실행되지 않은 경우
+    try:
+        from importlib.metadata import version
+
+        __version__ = version("inpynit")
+    except Exception:
+        __version__ = "0.0.0+dev"
+
 __author__ = "inpynit"
 __email__ = "contact@inpynit.dev"
 

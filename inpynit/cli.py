@@ -72,8 +72,6 @@ def create(project_name, template, quick):
             license="MIT",
             use_conda=True,
             use_git=True,
-            use_pre_commit=True,
-            use_github_actions=True,
         )
     else:
         # 대화형 모드 (기본)
@@ -131,8 +129,6 @@ def interactive_create(initial_name, initial_template):
     # 추가 옵션들
     use_conda = click.confirm("conda 환경을 생성하시겠습니까?", default=True)
     use_git = click.confirm("Git 저장소를 초기화하시겠습니까?", default=True)
-    use_pre_commit = click.confirm("pre-commit을 설정하시겠습니까?", default=True)
-    use_github_actions = click.confirm("GitHub Actions를 설정하시겠습니까?", default=True)
 
     config = ProjectConfig(
         name=project_name,
@@ -144,8 +140,6 @@ def interactive_create(initial_name, initial_template):
         license=license_value or "MIT",
         use_conda=use_conda,
         use_git=use_git,
-        use_pre_commit=use_pre_commit,
-        use_github_actions=use_github_actions,
     )
 
     return project_name, config

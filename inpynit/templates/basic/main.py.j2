@@ -4,7 +4,16 @@
 Created with inpynit 🚀
 """
 
-__version__ = "0.1.0"
+try:
+    from ._version import version as __version__
+except ImportError:
+    # 개발 모드이거나 setuptools_scm이 실행되지 않은 경우
+    try:
+        from importlib.metadata import version
+        __version__ = version("{{ project_name }}")
+    except Exception:
+        __version__ = "0.0.0+dev"
+
 __author__ = "{{ author }}"
 __email__ = "{{ email }}"
 

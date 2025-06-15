@@ -7,7 +7,7 @@ inpynit는 파이썬 프로젝트를 빠르고 쉽게 시작할 수 있도록 �
 ## ✨ 특징
 
 - 🎯 **다양한 템플릿**: 기본 패키지, 웹 앱, CLI 도구, 데이터 사이언스, 머신러닝 등
-- 🔧 **모던한 설정**: pyproject.toml, pre-commit, GitHub Actions 등
+- 🏷️ **스마트 버전 관리**: Git 태그와 패키지 버전이 **자동으로 동일하게** 유지됨
 - 🎨 **대화형 인터페이스**: 사용자 친화적인 프로젝트 설정 과정
 - 📦 **자동 환경 설정**: conda 환경, Git 저장소 자동 초기화
 - 🚀 **즉시 실행**: 설치 후 바로 사용 가능한 프로젝트 구조
@@ -107,7 +107,7 @@ inpynit create data-analysis --template datascience
 - **프로젝트 설명**: 프로젝트에 대한 간단한 설명
 - **파이썬 버전**: 3.8 ~ 3.12 중 선택
 - **라이선스**: MIT, Apache-2.0, GPL-3.0, BSD-3-Clause, ISC 중 선택
-- **환경 설정**: conda 환경, Git 저장소, pre-commit, GitHub Actions 설정 여부
+- **환경 설정**: conda 환경, Git 저장소 설정 여부
 
 ## 📁 생성되는 프로젝트 구조
 
@@ -185,16 +185,12 @@ pytest
 
 # 코드 포매팅
 ruff format .
-
-# 타입 체크
-mypy inpynit
 ```
 
 ### 개발 의존성
 
 - `pytest`: 테스트 프레임워크
 - `ruff`: 코드 포매팅 및 린팅
-- `mypy`: 타입 체크
 
 ## 🏗️ 주요 기능
 
@@ -207,10 +203,51 @@ mypy inpynit
 
 ### 자동화 기능
 
-- 🔄 **Git 저장소 자동 초기화**: 첫 커밋까지 자동 생성
+- 🔄 **Git 저장소 자동 초기화**: 첫 커밋과 초기 태그 자동 생성
 - 🐍 **conda 환경 자동 생성**: 프로젝트별 격리된 환경
 - 📝 **프로젝트 메타데이터 자동 설정**: pyproject.toml 완전 자동화
-- 🎨 **VS Code 설정**: 개발 환경 최적화
+- 🏷️ **Git 태그 기반 버전 관리**: setuptools-scm 자동 설정
+
+### 🎯 스마트 버전 관리의 장점
+
+**Git 태그를 생성하면 패키지 버전이 자동으로 동일하게 됩니다!**
+
+```bash
+# 1. Git 태그 생성
+git tag 1.2.3
+
+# 2. 빌드 시 자동으로 동일한 버전 적용
+python -m build
+# 결과: my-package-1.2.3-py3-none-any.whl
+
+# 버전 확인도 자동으로 동일
+python -c "import my_package; print(my_package.__version__)"
+# 출력: 1.2.3
+```
+
+**수동 버전 관리는 이제 그만!** setuptools-scm이 Git 태그를 읽어서 모든 버전을 자동으로 동기화합니다.
+
+#### 🔄 기존 방식 vs inpynit 방식
+
+**기존 수동 방식** ❌:
+
+- pyproject.toml에서 `version = "1.2.3"` 수정
+- \_\_init\_\_.py에서 `__version__ = "1.2.3"` 수정
+- CLI 버전에서 `version="1.2.3"` 수정
+- 실수 하나면 버전 불일치 발생! 😰
+
+**inpynit 자동 방식** ✅:
+
+- `git tag 1.2.3` 하나만 실행
+- 모든 버전이 자동으로 일치! 🎯
+
+**개발 중인 버전도 자동 관리:**
+
+```bash
+# 1.2.3 태그 이후 2번의 커밋이 있다면
+python -c "import my_package; print(my_package.__version__)"
+# 출력: 1.2.4.dev2+g1a2b3c4d  (자동 생성!)
+```
 
 ## 🌟 특별한 기능
 
