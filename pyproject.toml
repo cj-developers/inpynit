@@ -52,8 +52,6 @@ Documentation = "https://inpynit.readthedocs.io"
 where = ["."]
 include = ["inpynit*"]
 
-# mypy 설정 제거 - 심플한 패키지를 위해
-
 [tool.ruff]
 line-length = 119
 target-version = "py38"
