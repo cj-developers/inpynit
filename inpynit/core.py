@@ -117,9 +117,22 @@ class ProjectCreator:
         # 기본 디렉토리들
         project_path.mkdir(parents=True, exist_ok=True)
 
+        # 템플릿 변수들
+        template_vars = {
+            "project_name": config.name,
+            "project_slug": config.name.lower().replace("-", "_"),
+            "author": config.author,
+            "email": config.email,
+            "description": config.description or f"A {config.template} project created with inpynit",
+            "python_version": config.python_version,
+            "license": config.license,
+            "use_git": config.use_git,
+        }
+
         # 템플릿별 디렉토리 구조
         for directory in template_config.get("directories", []):
-            (project_path / directory).mkdir(parents=True, exist_ok=True)
+            directory_name = directory.format(**template_vars)
+            (project_path / directory_name).mkdir(parents=True, exist_ok=True)
 
     def _generate_template_files(self, config: ProjectConfig, project_path: Path):
         """템플릿 파일들을 생성합니다."""

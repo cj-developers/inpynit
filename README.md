@@ -11,6 +11,8 @@ inpynit는 파이썬 프로젝트를 빠르고 쉽게 시작할 수 있도록 �
 - 🎨 **대화형 인터페이스**: 사용자 친화적인 프로젝트 설정 과정
 - 📦 **자동 환경 설정**: conda 환경, Git 저장소 자동 초기화
 - 🚀 **즉시 실행**: 설치 후 바로 사용 가능한 프로젝트 구조
+- 🔧 **간단한 개발 환경**: 복잡한 설정 없이 기본적인 개발 도구만 포함
+- ✨ **깔끔한 구조**: pre-commit, GitHub Actions 등 복잡한 CI/CD 설정 없이 순수한 파이썬 프로젝트
 
 ## 🔧 설치
 
@@ -121,11 +123,28 @@ my-project/
 ├── tests/
 │   └── test_main.py
 ├── docs/
+├── .vscode/
 │   └── settings.json
 ├── pyproject.toml
+├── Makefile
 ├── README.md
 └── .gitignore
 ```
+
+**포함되는 것:**
+
+- 🐍 기본 패키지 구조 및 테스트
+- 📋 pyproject.toml (모던한 파이썬 패키지 설정)
+- 🏷️ Git 태그 기반 자동 버전 관리 (setuptools-scm)
+- 🛠️ 기본적인 개발 도구 (ruff, pytest)
+- 📖 자동 생성된 README
+
+**포함되지 않는 것:**
+
+- ❌ pre-commit 설정
+- ❌ GitHub Actions 워크플로우
+- ❌ 복잡한 CI/CD 파이프라인
+- ❌ 불필요한 설정 파일들
 
 ### 웹 앱 템플릿 (`fastapi`, `flask`)
 
@@ -266,7 +285,16 @@ python -c "import my_package; print(my_package.__version__)"
 
 ## 📚 개발 현황
 
-현재 **기본 템플릿**만 구현되어 있으며, 다른 템플릿들은 개발 중입니다. 템플릿 구조는 `templates.py`에서 확인할 수 있습니다.
+현재 **기본 템플릿**만 구현되어 있으며, 다른 템플릿들은 개발 중입니다.
+
+### 설계 철학
+
+inpynit는 **단순함**을 추구합니다:
+
+- 복잡한 CI/CD 설정 대신 기본적인 개발 도구에 집중
+- pre-commit, GitHub Actions 등은 필요시 개발자가 직접 추가
+- Git 태그 기반 자동 버전 관리로 간편한 릴리스
+- 모던한 파이썬 생태계 도구 (ruff, pytest, setuptools-scm) 활용
 
 ---
 

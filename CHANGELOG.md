@@ -49,7 +49,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - ruff for formatting and linting
 - setuptools-scm for version management
 - Makefile for common tasks
-- GitHub Actions for automated releases
 
 ---
 
@@ -58,7 +57,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `0.1.0` - 메이저.마이너.패치 형식 (v 접두사 없음)
 - 각 릴리스마다 Git 태그 생성
 - setuptools-scm이 Git 태그를 읽어 패키지 버전 자동 생성
-- GitHub Actions를 통한 자동 릴리스
 
 ## 📋 변경사항 분류
 
