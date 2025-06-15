@@ -132,9 +132,15 @@ def interactive_create(initial_name, initial_template):
     license_choice = click.prompt("라이선스", default="MIT", type=click.Choice(licenses))
     license_value = None if license_choice == "없음" else license_choice
 
+    # 패키지 선택 (간단하게)
+    selected_packages = select_packages_simple()
+
     # 추가 옵션들
     use_conda = click.confirm("conda 환경을 생성하시겠습니까?", default=True)
     use_git = click.confirm("Git 저장소를 초기화하시겠습니까?", default=True)
+
+    # 한 줄 비우기 (모든 선택 완료 후)
+    console.print()
 
     config = ProjectConfig(
         name=project_name,
@@ -146,6 +152,7 @@ def interactive_create(initial_name, initial_template):
         license=license_value or "MIT",
         use_conda=use_conda,
         use_git=use_git,
+        dependencies=selected_packages,
     )
 
     return project_name, config
@@ -169,6 +176,30 @@ def templates():
     console.print("\n💡 사용법:", style="bold blue")
     console.print("  inpynit create my-project --template <템플릿명>")
     console.print("  inpynit create my-project --interactive")
+
+
+def select_packages_simple():
+    """사용자가 필요한 패키지들을 직접 입력합니다."""
+    console.print("\n📦 필요한 파이썬 패키지들을 입력하세요 (예시: aiohttp pydantic fastapi)")
+
+    # 패키지 입력받기
+    packages_input = click.prompt("패키지 이름들 (공백으로 구분, 없으면 엔터)", default="", show_default=False)
+
+    if not packages_input.strip():
+        console.print("\n📝 패키지를 선택하지 않았습니다.", style="yellow")
+        console.print()  # 한 줄 비우기
+        return []
+
+    # 공백으로 분리하여 패키지 목록 생성
+    packages = [pkg.strip() for pkg in packages_input.split() if pkg.strip()]
+
+    if packages:
+        console.print(f"\n✅ 선택된 패키지: {len(packages)}개", style="green")
+        for pkg in packages:
+            console.print(f"  • {pkg}")
+        console.print()  # 한 줄 비우기
+
+    return packages
 
 
 if __name__ == "__main__":

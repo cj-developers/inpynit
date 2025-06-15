@@ -30,6 +30,11 @@ class ProjectConfig:
     license: str = "MIT"
     use_conda: bool = True
     use_git: bool = True
+    dependencies: list = None  # 선택된 패키지 목록
+
+    def __post_init__(self):
+        if self.dependencies is None:
+            self.dependencies = []
 
 
 class ProjectCreator:
@@ -104,6 +109,9 @@ class ProjectCreator:
                     self._create_conda_env(config, project_path)
                     progress.update(task, completed=True)
 
+            # 한 줄 비우기 (작업 완료 후)
+            self.console.print()
+
             # 성공 메시지 출력
             self._print_success_message(config, project_path)
             return True
@@ -129,6 +137,7 @@ class ProjectCreator:
             "python_version": config.python_version,
             "license": config.license,
             "use_git": config.use_git,
+            "dependencies": config.dependencies,
         }
 
         # 템플릿별 디렉토리 구조
@@ -154,6 +163,7 @@ class ProjectCreator:
             "python_version": config.python_version,
             "license": config.license,
             "use_git": config.use_git,
+            "dependencies": config.dependencies,
         }
 
         # 템플릿 파일들 처리
@@ -167,6 +177,12 @@ class ProjectCreator:
             output_path = project_path / output_file
             output_path.parent.mkdir(parents=True, exist_ok=True)
             output_path.write_text(content, encoding="utf-8")
+
+        # requirements.txt 파일 생성 (의존성이 있는 경우)
+        if config.dependencies:
+            requirements_content = "\n".join(config.dependencies) + "\n"
+            requirements_path = project_path / "requirements.txt"
+            requirements_path.write_text(requirements_content, encoding="utf-8")
 
     def _create_conda_env(self, config: ProjectConfig, project_path: Path):
         """conda 환경을 생성합니다."""
